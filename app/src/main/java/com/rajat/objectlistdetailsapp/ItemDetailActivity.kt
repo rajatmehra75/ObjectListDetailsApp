@@ -21,7 +21,7 @@ class ItemDetailActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_item_detail)
         itemData = intent.getSerializableExtra(ITEM.itemArg) as ItemModel
-        if (itemData.name == null) {
+        if (itemData.name.isEmpty()) {
             finish()
         }
         setDataOnUI(itemData)

@@ -20,7 +20,7 @@ import java.io.InputStreamReader
 internal class MainActivity : AppCompatActivity(), OnListFragmentInteractionListener {
 
     private var selectedPosition: Int = 0
-    lateinit var context: Context
+    private lateinit var context: Context
     private var itemList: List<ItemModel>? = null
     private var currentItemList: List<ItemModel>? = null
 
@@ -74,14 +74,9 @@ internal class MainActivity : AppCompatActivity(), OnListFragmentInteractionList
             )
             var mLine: String
             var fileData = ""
-            //            reader.readLine();
-            while (reader.readLine().also { if (it != null) mLine = it else mLine = "" } != null) {
-                Timber.d("$mLine")
+            while (reader.readLine().also { mLine = it ?: "" } != null) {
+                Timber.d(mLine)
                 try {
-//                    fileData = """
-//                            $fileData$mLine
-//
-//                            """.trimIndent()
                     fileData += mLine
                 } catch (e: Exception) {
                     e.printStackTrace()
@@ -128,17 +123,15 @@ internal class MainActivity : AppCompatActivity(), OnListFragmentInteractionList
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        when (item?.itemId) {
+        when (item.itemId) {
             R.id.menu_favorite -> {
                 item.isChecked = !item.isChecked
                 if (item.isChecked) {
-//                    currentItemList = itemList?.filter { it.isFavorite }
                     setFavoriteItemList()
                     item.icon = null
                 } else {
-//                    itemList?.let { setAdapter(it) }
                     resetItemList()
-                    item.icon = context?.let {
+                    item.icon = context.let {
                         AppCompatResources.getDrawable(
                             it,
                             R.drawable.ic_star_24dp
