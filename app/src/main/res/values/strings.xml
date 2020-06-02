@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">ObjectListDetailsApp</string>
+    <string name="db_name">item_db.db</string>
+    <string name="dash">-</string>
+    <string name="image_description_favorite_item">Image for showing favorite item</string>
+    <string name="all">All</string>
+</resources>
